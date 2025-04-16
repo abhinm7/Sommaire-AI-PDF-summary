@@ -1,10 +1,24 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import BgGradient from "@/components/common/bg-gradient";
+import CTAsection from "@/components/common/cta-section";
+import DemoSection from "@/components/common/demo-section";
+import HowItWorkSection from "@/components/common/how-it-work-section";
+import PricingSection from "@/components/common/pricing-section";
+import HeroSection from "@/components/home/hero-section";
+import { toast } from "sonner";
+
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-         <Button size={"lg"} variant="outline">hello</Button>       
+    <div className=" relative w-full">
+      <BgGradient />
+      <div className="flex flex-col">
+        <HeroSection />
+        <DemoSection />
+        <HowItWorkSection />
+        <PricingSection />
+      </div>
+
+      <CTAsection/>
     </div>
   );
 }
