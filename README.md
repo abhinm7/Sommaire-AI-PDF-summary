@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🚀 Application Features:
+📝 Clear, structured summaries with key points and insights
 
-## Getting Started
+📊 Beautiful, interactive summary viewer with progress tracking
 
-First, run the development server:
+🔐 Secure file handling and processing
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+🛡️ Protected routes and API endpoints
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+💳 Flexible pricing plans (Basic and Pro)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+🔔 Webhook implementation for Stripe events
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+👤 User dashboard for managing summaries
 
-## Learn More
+📱 Responsive design for mobile and desktop
 
-To learn more about Next.js, take a look at the following resources:
+🔄 Real-time updates and path revalidation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+🚀 Production-ready deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+🔔 Toast notifications for upload status, processing updates, and error handling
 
-## Deploy on Vercel
+⚡ Performance optimizations
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🔍 SEO-friendly summary generation
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🧑‍💻 Getting Started
+To get started with this project:
+
+Fork the repo
+
+Copy the .env.example variables into a separate .env.local file
+
+Create the required credentials:
+
+OpenAI API key
+
+Clerk authentication
+
+UploadThing configuration
+
+Stripe payment setup
+
+NeonDB database connection
