@@ -28,8 +28,8 @@ export default function UploadForm() {
       console.error("error occurred while uploading", err);
       toast.error("File upload failed")
     },
-    onUploadBegin: ({ file }) => {
-      console.log("upload has begun for", file);
+    onUploadBegin: (data) => {
+      console.log("upload has begun for");
     },
   });
 
@@ -46,7 +46,6 @@ export default function UploadForm() {
 
       // validating the fields
       const validatedFields = formSchema.safeParse({ file });
-      console.log("status", validatedFields);
 
       // schema with zod
       if (!validatedFields.success) {
@@ -58,8 +57,8 @@ export default function UploadForm() {
 
 
 
-      const resp = await startUpload([file]);
-      if (!resp) {
+      const uploadResponse = await startUpload([file]);
+      if (!uploadResponse) {
         toast.error("Something went wrong,please use a different file")
         setIsLoading(false);
         return;
@@ -68,7 +67,12 @@ export default function UploadForm() {
       toast("uploading your PDF ...")
       // upload the file to uploadthing
 
-      const result = await generatePdfSummary(resp );
+      const uploadFileUrl = uploadResponse[0].serverData.fileUrl;
+
+      const result = await generatePdfSummary({
+        fileUrl:uploadResponse[0].serverData.fileUrl,
+        fileName:file.name,
+      });
 
       console.log("summary :", result);
 
@@ -80,7 +84,7 @@ export default function UploadForm() {
         
         if(data.summary){
          storeResult = await storePdfSummaryAction({
-            fileUrl: resp[0].serverData.file.url,
+            fileUrl: uploadFileUrl,
             summary: data.summary,
             title: data.title,
             fileName: file.name
