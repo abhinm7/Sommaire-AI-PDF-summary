@@ -53,7 +53,8 @@ export default function RootLayout({
           </div>
           <Toaster
             richColors
-            position="top-right" // or "bottom-right", "top-left", etc.
+            position="top-right"
+            expand={true} // or "bottom-right", "top-left", etc.
           />
         </body>
       </html>

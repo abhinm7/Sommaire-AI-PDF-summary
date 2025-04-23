@@ -16,17 +16,11 @@ interface pdfSummaryType {
     fileName: string;
 }
 
-// export async function getPdfText({
-//     fileUrl,
-//     fileName
-// }:{
-//     fileUrl:string,
-//     fileName:string
-// }){
-
-// }
-
-export async function generatePdfSummary({ fileUrl, fileName }: { fileUrl: string,fileName:string }) {
+export async function   generatePdfText({
+    fileUrl,
+}:{
+    fileUrl:string,
+}){
     if (!fileUrl) {
         return {
             success: false,
@@ -35,17 +29,41 @@ export async function generatePdfSummary({ fileUrl, fileName }: { fileUrl: strin
         };
     }
 
-    if (!fileUrl) {
+    try {
+        const pdfText = await fetchAndExtractText(fileUrl);
+        console.log("text :", pdfText);
+
+        let summary;
+
+        if (!pdfText) {
+            return {
+                success: false,
+                message: 'Failed to fetch and extract PDF text',
+                data: null,
+            };
+        }
+
+        return {
+            success: true,
+            message: 'PDF Text generated successfully',
+            data: {
+                pdfText
+            }
+        };
+    } catch (error) {
+        console.error("Error fetch and extract PDF", error);
         return {
             success: false,
             message: "upload failed",
             data: null
-        }
+        };
     }
+}
+
+export async function generatePdfSummary({ pdfText, fileName }: { pdfText: string,fileName:string }) {
+
 
     try {
-        const pdfText = await fetchAndExtractText(fileUrl);
-        console.log("text :", pdfText);
 
         let summary;
         try {
@@ -80,7 +98,6 @@ export async function generatePdfSummary({ fileUrl, fileName }: { fileUrl: strin
             };
         }
 
-        const formattedName = formatFileNameAsTitle(fileName);
         return {
             success: true,
             message: 'Summary generated successfully',
@@ -89,11 +106,12 @@ export async function generatePdfSummary({ fileUrl, fileName }: { fileUrl: strin
                 summary,
             }
         };
+
     } catch (error) {
-        console.error("Error fetching and extracting text", error);
+        console.error("Failed to Generate", error);
         return {
             success: false,
-            message: "upload failed",
+            message: "file upload failed",
             data: null
         };
     }

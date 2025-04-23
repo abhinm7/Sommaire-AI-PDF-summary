@@ -4,10 +4,11 @@ import { useUploadThing } from "@/utils/uploadthing";
 import UploadFormInput from "./upload-form-input";
 import { z } from "zod";
 import { toast } from "sonner";
-import { generatePdfSummary, storePdfSummaryAction } from "@/actions/upload-actions";
+import { generatePdfSummary, generatePdfText, storePdfSummaryAction } from "@/actions/upload-actions";
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import LoadingSkeleton from "./loading-skeleton";
+import { formatFileNameAsTitle } from "@/utils/format-utils";
 
 const formSchema = z.object({
   file: z.instanceof(File, { message: "File is invalid" }).refine((file) => file.size <= 24 * 1024 * 1024, { message: "File size must be less than 24MB" }).refine((file) => file.type === "application/pdf", { message: "File must be a PDF" })
@@ -64,46 +65,38 @@ export default function UploadForm() {
         return;
       }
 
-      toast("uploading your PDF ...")
+      toast("Processing PDF")
       // upload the file to uploadthing
 
       const uploadFileUrl = uploadResponse[0].serverData.fileUrl;
 
-      const result = await generatePdfSummary({
-        fileUrl:uploadResponse[0].serverData.fileUrl,
-        fileName:file.name,
+      let storeResult: any
+
+
+      const formattedName = formatFileNameAsTitle(file.name);
+      const result = await generatePdfText({ fileUrl: uploadFileUrl })
+      toast("Generating PDF summary...")
+      //call AI service
+      const summaryResult = await generatePdfSummary({
+        pdfText: result?.data?.pdfText ?? '',
+        fileName: formattedName,  
       });
 
-      console.log("summary :", result);
+      toast.success("Saving PDF Summary 📂")
 
-      const { data = null, message = null } = result || {};
+      const { data = null, message = null } = summaryResult || {};
 
-      if (data) {
-        let storeResult:any
-        toast("Data is Saving ...")
-        
-        if(data.summary){
-         storeResult = await storePdfSummaryAction({
-            fileUrl: uploadFileUrl,
-            summary: data.summary,
-            title: data.title,
-            fileName: file.name
-          })
-          toast.success("Summary Genarated! ✨")
-          formRef.current?.reset();
-          
-          
-          //redirect to the [id] summary page 
-          //saving summary to the database
-          router.push(`/summaries/${storeResult.data.id}`);
-          
-        }
+      if (data?.summary) {
+        storeResult = await storePdfSummaryAction({
+          fileUrl: uploadFileUrl,
+          summary: data.summary,
+          title: formattedName,
+          fileName: file.name
+        })
+        toast.success("Summary Genarated! ✨")
+        formRef.current?.reset();
 
-
-        // parse the pdf using lang chain
-        // summarize the pdf using AI
-        // save the summary to the database
-        // redirect to the [id] summary page
+        router.push(`/summaries/${storeResult.data.id}`);
 
       }
     } catch (error) {
@@ -139,10 +132,10 @@ export default function UploadForm() {
               </span>
             </div>
           </div>
-          <LoadingSkeleton/>
+          <LoadingSkeleton />
         </>
       )}
     </div>
-   );
+  );
 
 }
