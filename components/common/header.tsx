@@ -41,10 +41,7 @@ export const Header = () => {
         <SignedOut>
           <NavLink href="/sign-in">Sign In</NavLink>
         </SignedOut>
-      </div>
-
-
-   
+      </div>  
     </header >
   );
 };
