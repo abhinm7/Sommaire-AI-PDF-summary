@@ -105,7 +105,7 @@ interface ParsedSection {
       return null;
     }
   
-    const cleanContent = content.replace(/^['*]\s*/, '').trim(); // Remove leading '*' or quote
+    const cleanContent = content.replace(/^['*]\s*/, '').trim();
     const matches = cleanContent.match(/^(\p{Emoji}+)(.+)$/u);
   
     if (!matches) {
@@ -113,6 +113,12 @@ interface ParsedSection {
     }
   
     const [, emoji, text] = matches;
+  
+    // Explicitly check that emoji and text are strings
+    if (typeof emoji !== 'string' || typeof text !== 'string') {
+      return null;
+    }
+  
     return {
       emoji: emoji.trim(),
       text: text.trim(),
