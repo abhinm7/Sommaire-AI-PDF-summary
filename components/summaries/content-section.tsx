@@ -22,7 +22,7 @@ const EmojiPoint = ({ point }: { point: string }) => {
                 </span>
                 <p className="text-lg lg:text-xl 
                 text-muted-foreground/90 leading-relaxed">
-                    {text}
+                    {text} 
                 </p>
             </div>
         </MotionDiv>
@@ -41,7 +41,7 @@ const RegularPoint = ({ point }: { point: string }) => {
           group-hover:opacity-100 transition-opacity rounded-2xl"
             />
             <p className="relative text-lg lg:text-xl text-muted-foreground/90 leading-relaxed text-left">
-                {point}
+                {point} 
             </p>
         </MotionDiv>
     );
@@ -74,7 +74,7 @@ export default function ContentSection({
 
                 if (hasEmoji || isMainPoint) {
                     return (
-                        <EmojiPoint key={`point-${index}`} point={point} />           //6:10:42
+                        <EmojiPoint key={`point-${index}`} point={point} />       
                     )
                 }
 
