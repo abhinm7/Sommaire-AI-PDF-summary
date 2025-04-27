@@ -33,29 +33,26 @@ interface ParsedSection {
     const cleanTitle = title.startsWith('#') ? title.substring(1).trim() : title.trim();
   
     const points: string[] = [];
-    let currentPoint: string | null = null;
+    let currentPoint: string = '';
   
     content.forEach((line) => {
       const trimmedLine = line.trim();
   
       if (!trimmedLine) {
-        // Empty line: finalize current point if it exists
-        if (currentPoint) {
+        if (currentPoint.trim()) {
           points.push(currentPoint.trim());
-          currentPoint = null;
+          currentPoint = '';
         }
         return;
       }
   
       if (trimmedLine.startsWith('*')) {
-        // New point starting with '*': finalize previous point if it exists
-        if (currentPoint) {
+        if (currentPoint.trim()) {
           points.push(currentPoint.trim());
         }
         currentPoint = trimmedLine;
       } else {
-        // Non-'*' line: treat as a new point
-        if (currentPoint) {
+        if (currentPoint.trim()) {
           points.push(currentPoint.trim());
         }
         currentPoint = trimmedLine;
@@ -63,7 +60,7 @@ interface ParsedSection {
     });
   
     // Finalize the last point if it exists
-    if (currentPoint) {
+    if (currentPoint.trim()) {
       points.push(currentPoint.trim());
     }
   
@@ -114,7 +111,6 @@ interface ParsedSection {
   
     const [, emoji, text] = matches;
   
-    // Explicitly check that emoji and text are strings
     if (typeof emoji !== 'string' || typeof text !== 'string') {
       return null;
     }
@@ -124,3 +120,4 @@ interface ParsedSection {
       text: text.trim(),
     };
   }
+  
