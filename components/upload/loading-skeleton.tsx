@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 // #L to chat, #K to generate
 export default function LoadingSkeleton() {
   return (
-    <Card className="relative px-2 h-[700px] w-[600px] max-w-lg mx-auto overflow-hidden bg-linear-to-br from-background via-background/95 to-rose-500/5 backdrop-blur-lg shadow-2xl rounded-3xl border border-rose-500/10">
+    <Card className="relative px-2 h-[90vh] sm:h-[700px] w-full max-w-sm sm:max-w-lg mx-auto overflow-hidden bg-linear-to-br from-background via-background/95 to-rose-500/5 backdrop-blur-lg shadow-2xl rounded-3xl border border-rose-500/10">
       {/* Loading Progress Bar */}
       <div className="absolute top-0 left-0 right-0 z-20 bg-background/80 backdrop-blur-xs pt-4 pb-2 border-b border-rose-500/10">
         <div className="px-4 flex gap-1.5">

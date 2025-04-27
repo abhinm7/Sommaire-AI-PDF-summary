@@ -21,18 +21,20 @@ export const Header = () => {
           <span className="font-extrabold lg:text-xl text-gray-900">Sommaire</span></NavLink>
       </div>
 
-      <div className="flex lg:justify-center gap-4 lg:gap-12 lg:items-center">
-        <NavLink href="#pricing">Pricing</NavLink>
+      <div className="flex justify-center items-center gap-4 lg:gap-12 text-sm lg:text-base">
+        <NavLink href="#pricing" className="text-sm lg:text-base">Pricing</NavLink>
         <SignedIn>
-          <NavLink href="/dashboard">Your Summaries</NavLink>
+          <NavLink href="/dashboard" className="text-sm lg:text-base">Your Summaries</NavLink>
         </SignedIn>
       </div>
+
+
 
       <div className="flex lg:justify-end lg:flex-1">
         <SignedIn>
           <div className="flex gap-2 items-center">
             <NavLink href="/upload">Upload a PDF</NavLink>
-             <PlanBadge/>
+            <PlanBadge />
             <SignedIn>
               <UserButton />
             </SignedIn>
@@ -41,7 +43,7 @@ export const Header = () => {
         <SignedOut>
           <NavLink href="/sign-in">Sign In</NavLink>
         </SignedOut>
-      </div>  
+      </div>
     </header >
   );
 };
