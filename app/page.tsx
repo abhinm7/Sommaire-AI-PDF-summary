@@ -4,8 +4,6 @@ import DemoSection from "@/components/common/demo-section";
 import HowItWorkSection from "@/components/common/how-it-work-section";
 import PricingSection from "@/components/common/pricing-section";
 import HeroSection from "@/components/home/hero-section";
-import { toast } from "sonner";
-
 
 export default function Home() {
   return (
@@ -15,9 +13,8 @@ export default function Home() {
         <HeroSection />
         <DemoSection />
         <HowItWorkSection />
-        <PricingSection />
-      </div>
-
+        <PricingSection /> 
+      </div> 
       <CTAsection/>
     </div>
   );

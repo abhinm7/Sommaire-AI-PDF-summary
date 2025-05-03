@@ -52,7 +52,7 @@ export default function RootLayout({
             <Footer />
           </div>
           <Toaster
-            richColors
+            richColors 
             position="top-right"
             expand={true} // or "bottom-right", "top-left", etc.
           />
