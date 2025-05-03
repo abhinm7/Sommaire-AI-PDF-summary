@@ -3,8 +3,6 @@
 import { getDbConnection } from "@/lib/db";
 import { generateSummaryFromGemini } from "@/lib/geminiai";
 import { fetchAndExtractText } from "@/lib/langchain";
-import generateSummaryFromOpenAI from "@/lib/openai";
-import { formatFileNameAsTitle } from "@/utils/format-utils";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
@@ -16,7 +14,7 @@ interface pdfSummaryType {
     fileName: string;
 }
 
-export async function   generatePdfText({
+export async function generatePdfText({
     fileUrl,
 }:{
     fileUrl:string,
