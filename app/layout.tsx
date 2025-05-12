@@ -12,8 +12,6 @@ const fontSans = FontSans({
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
-
-
 export const metadata: Metadata = {
   title: "Sommaire",
   description: "Sommaire is an app for summarzing PDF documents",

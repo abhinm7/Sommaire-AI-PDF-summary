@@ -70,7 +70,7 @@ export async function generatePdfSummary({ pdfText, fileName }: { pdfText: strin
 
         } catch (geminiError) {
             console.error(
-                'Gemini API failed after OpenAI quote exceeded',
+                'Gemini API failed after quote exceeded',
                 geminiError
             );
         }
